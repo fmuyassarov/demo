@@ -1,7 +1,7 @@
 ## Before you begin
 
 ##### Required
-1. Either containerd or CRI-O container runtimes installed, with containerd requiring at least release version 1.17.0 or later, and CRI-O needing release version 1.26.0 or later.
+1. Either containerd or CRI-O container runtimes installed, with containerd requiring at least release version 1.7.0 or later, and CRI-O needing release version 1.26.0 or later.
 1. Kubernetes cluster up and running.
 1. Helm installed. This is necessary for the installation of the Topology-Aware NRI plugin through the Helm chart.
 ## Install Topology-aware NRI plugin
@@ -18,7 +18,7 @@ Same steps can be re-used for installing Balloons NRI plugins too.
 1. Install the Topology-Aware NRI plugin. We'll install the plugin in the `kube-system` namespace. By default, NRI is disabled in both runtimes and needs to be enabled for any plugins to function. We will allow the Helm chart to activate the NRI feature on the containerd for us by passing the `nri.patchContainerdConfig` parameter before installing the plugin.
 
     ```sh
-    helm install topology-aware nri-plugins/deployment/helm/resource-management-policies/topology-aware/ --namespace kube-system --set nri.patchContainerdConfig=true
+    helm install topology-aware deployment/helm/resource-management-policies/topology-aware/ --namespace kube-system --set nri.patchContainerdConfig=true
     ```
 
 1. Verify that NRI is enabled on the containerd's config file. 
@@ -118,7 +118,7 @@ While the Topology-Aware NRI Plugin offers various configuration options to fine
     kubectl delete -f workload_pod.yaml -n default
 
     # Install the plugin via Helm chart
-    helm install topology-aware nri-plugins/deployment/helm/resource-management-policies/topology-aware/ --namespace kube-system --set nri.patchContainerdConfig=true
+    helm install topology-aware ../../nri-plugins/deployment/helm/resource-management-policies/topology-aware/ --namespace kube-system --set nri.patchContainerdConfig=true
     ```
 
 1. Once workload Pod is running, run the report.sh script
